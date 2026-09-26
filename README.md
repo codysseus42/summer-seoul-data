@@ -13,8 +13,8 @@
 | 종관기상관측(ASOS) 일자료 | 서울(108), 대구(143), 추풍령(135) | 1960-01-01 ~ 2026-09-13 | 데이터 → 기상관측 → 지상 → 종관기상관측(ASOS) → 자료 |
 | 관측지점정보 | 위 3개 지점 | 지점 이력 전체 | 데이터 → 메타데이터 → 지점정보 → 관측지점정보 |
 
-`data/raw/`는 원자료 그대로이며, `data/processed/asos_clean.csv`는 codysseus42가 결측·이상치를 처리해 재가공한 자료입니다.
-가공 내용은 `01_preprocess.ipynb`에 기록되어 있습니다. (수집일: 2026-09-15)
+`data/raw/`는 원자료 그대로이며, `data/processed/asos_clean.csv`는 codysseus42가 결측·이상치를 처리해 재가공한 자료다.
+가공 내용은 `01_preprocess.ipynb`에 기록되어 있다. (수집일: 2026-09-15)
 
 ## 파일 구조
 
@@ -77,3 +77,38 @@ summer-seoul-data/
    시작 연도를 네 자리로 쓰면 파일 이름 순서가 시간 순서와 같아져서, `sorted(glob(...))`가 파일을 올바른 순서로 읽는다.
 3. `01_preprocess.ipynb`에서 지점별 파일 경로를 새 지점으로 바꿔 실행한다. 원본은 CP949 인코딩이므로 `encoding="cp949"`를 유지해야 한다.
 4. 관측지점 이전 이력은 기상자료개방포털 → 메타데이터 → 지점정보 → 관측지점정보에서 확인한다. 분석 기간 중에 관측소가 옮겨졌다면 해석에 반영해야 한다(이 분석에서는 대구 2017년 8월 이전).
+
+## 평가 기준 대응
+
+### 최종 결과물
+
+| 평가 항목 | 대응 문서 | 해당 절 |
+| --- | --- | --- |
+| 분석 리포트(Markdown) | [REPORT.md](./REPORT.md) | [목차](./REPORT.md#목차) |
+| 시각화 2개 이상 (권장 3개 이상) | [REPORT.md](./REPORT.md) | [분석 결과 및 시각화](./REPORT.md#5-분석-결과-및-시각화) (그림 7개) |
+| Python 코드 | [01_preprocess.ipynb](./01_preprocess.ipynb), [02_analysis.ipynb](./02_analysis.ipynb) | [실행 방법](#실행-방법) |
+| GitHub 저장소: 코드·리포트·데이터 | 이 저장소 | [파일 구조](#파일-구조) |
+
+### 기능 요구 사항
+
+| 평가 항목 | 대응 문서 | 해당 절 |
+| --- | --- | --- |
+| 시계열 데이터 1개 선정, 100개 이상 데이터 포인트 | [REPORT.md](./REPORT.md) | [원본 데이터](./REPORT.md#원본-데이터--종관기상관측asos-일자료) |
+| 데이터 출처와 기간 명시 | [REPORT.md](./REPORT.md) | [원본 데이터](./REPORT.md#원본-데이터--종관기상관측asos-일자료) |
+| 분석 질문 3개 이상 | [REPORT.md](./REPORT.md) | [분석 질문](./REPORT.md#2-분석-질문) |
+| 데이터 기본 정보(기간, 컬럼, 결측치) 확인 | [REPORT.md](./REPORT.md), [01_preprocess.ipynb](./01_preprocess.ipynb) | [사용 항목](./REPORT.md#사용-항목-15개) |
+| 결측치·이상치 처리 기준 | [REPORT.md](./REPORT.md), [01_preprocess.ipynb](./01_preprocess.ipynb) | [전처리 기준](./REPORT.md#전처리-기준) |
+| 시계열 분석 기법 2가지 이상 | [REPORT.md](./REPORT.md) | [사용한 시계열 기법](./REPORT.md#사용한-시계열-기법) |
+| 집계 단위 선택 근거 | [REPORT.md](./REPORT.md) | [집계 단위](./REPORT.md#집계-단위--일--여름--10년) |
+| 인사이트 3개 이상 (관찰 수치 포함) | [REPORT.md](./REPORT.md) | [인사이트](./REPORT.md#6-인사이트) |
+| 결론 및 한계점 | [REPORT.md](./REPORT.md) | [결론 및 한계점](./REPORT.md#7-결론-및-한계점) |
+
+### 제약 사항
+
+| 평가 항목 | 대응 문서 | 해당 절 |
+| --- | --- | --- |
+| 의존성 목록 | [requirements.txt](./requirements.txt) | [실행 환경](#실행-환경) |
+| 실행 방법(노트북 실행 순서) | README | [실행 방법](#실행-방법) |
+| 데이터 출처·수집 방법·라이선스 | README, [data/README.md](./data/README.md) | [데이터 출처](#데이터-출처) |
+| 관찰(근거)과 해석(가설) 구분 | [REPORT.md](./REPORT.md) | [분석 결과 및 시각화](./REPORT.md#5-분석-결과-및-시각화) |
+| AI 사용 로그 (사용 작업·이유·검증 방법) | [REPORT.md](./REPORT.md) | [AI 사용 로그](./REPORT.md#8-ai-사용-로그) |
